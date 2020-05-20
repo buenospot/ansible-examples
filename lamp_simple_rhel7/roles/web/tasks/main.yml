@@ -1,3 +1,14 @@
 ---
-- include: install_httpd.yml
-- include: copy_code.yml
+- include_tasks: remove_httpd.yml
+  when: teardown
+
+- name: Provisioning the Web Role
+  block:
+    - name: install httpd
+      include_tasks: install_httpd.yml
+    - name: copy code
+      include_tasks: copy_code.yml
+  when: not teardown
+
+# - include: install_httpd.yml
+# - include: copy_code.yml

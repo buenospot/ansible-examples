@@ -1,0 +1,8 @@
+- name: Configure and deploy the Webservers and application code
+  hosts: lamp-servers
+  remote_user: root
+
+  roles:
+    - role: web
+      vars:
+        teardown: true

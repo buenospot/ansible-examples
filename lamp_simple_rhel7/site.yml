@@ -13,7 +13,9 @@
   remote_user: root
 
   roles:
-    - web
+    - role: web
+      vars:
+        teardown: false
 
 - name: Deploy MySQL and configure the Databases
   hosts: lamp-servers
