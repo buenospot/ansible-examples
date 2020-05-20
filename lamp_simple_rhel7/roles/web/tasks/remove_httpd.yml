@@ -1,0 +1,32 @@
+---
+# These tasks remove http and the php modules.
+
+- name: stop http service state
+  service: 
+    name: httpd
+    state: stopped
+    enabled: no
+
+- name: Configure SELinux to allow httpd to connect to remote database
+  seboolean:
+    name: httpd_can_network_connect_db
+    state: false
+    persistent: no
+
+- name: remove firewalld rule for httpd
+  firewalld:
+    port: "{{ httpd_port }}/tcp"
+    state: absent
+    immediate: yes
+
+- name: Remove http and php etc
+  yum: 
+    name: "{{ item }}"
+    state: absent
+  with_items:
+   - httpd
+   - php
+   - php-mysql
+   - git
+   - libsemanage-python
+   - libselinux-python
