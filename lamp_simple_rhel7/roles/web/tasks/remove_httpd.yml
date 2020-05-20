@@ -13,11 +13,11 @@
     state: false
     persistent: no
 
-- name: remove firewalld rule for httpd
-  firewalld:
-    port: "{{ httpd_port }}/tcp"
-    state: absent
-    immediate: yes
+# - name: remove firewalld rule for httpd
+#   firewalld:
+#     port: "{{ httpd_port }}/tcp"
+#     state: absent
+#     immediate: yes
 
 - name: Remove http and php etc
   yum: 
